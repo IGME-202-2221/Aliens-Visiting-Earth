@@ -4,12 +4,12 @@
 
 ### Student Info
 
--   Name: YOUR NAME
--   Section: ##
+-   Name: Madeline Boussa
+-   Section: 05
 
 ## Game Design
 
--   Camera Orientation: _How are the art assets viewed from? (ie. topdown or side)_
+-   Camera Orientation: side view
 -   Camera Movement: _How does the camera move in your game? (if at all)_
 -   Player Health: _How are you handling player health? (healthbar, lives, ?)_
 -   End Condition: _How does a game/round/level end?_
