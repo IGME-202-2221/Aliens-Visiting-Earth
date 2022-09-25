@@ -45,8 +45,7 @@ in this side-scrolling, arcade-style shoot-em-up to set a new highschore and bri
 
 ## Sources
 
--   _List all project sources here –models, textures, sound clips, assets, etc._
--   _If an asset is from the Unity store, include a link to the page and the author’s name_
+-Alien Sprite: https://www.kenney.nl/assets/alien-ufo-pack
 
 ## Known Issues
 
