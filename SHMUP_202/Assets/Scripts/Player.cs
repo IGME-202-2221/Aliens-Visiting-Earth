@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     float speed = 5f;
 
     Vector3 playerPosition = Vector3.zero;
-    Vector3 direction = Vector3.right;
+    Vector3 direction = Vector3.zero;
     Vector3 velocity = Vector3.zero;
 
     float totalCamHeight;
