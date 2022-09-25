@@ -47,6 +47,7 @@ in this side-scrolling, arcade-style shoot-em-up to set a new highschore and bri
 
 -Alien Sprite: https://www.kenney.nl/assets/alien-ufo-pack
 <br>-Enemy and Obstacle Sprites: https://www.kenney.nl/assets/space-shooter-extension
+<br>-Obstacle Sprites: https://www.kenney.nl/assets/simple-space
 
 ## Known Issues
 
