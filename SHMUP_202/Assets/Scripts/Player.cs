@@ -63,11 +63,5 @@ public class Player : MonoBehaviour
     {
         // get the value from the context
         direction = context.ReadValue<Vector2>();
-
-        // prevents snapping back to default orientatino
-        if (direction != Vector3.zero)
-        {
-            transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
-        }
     }
 }
