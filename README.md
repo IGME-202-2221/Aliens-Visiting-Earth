@@ -43,6 +43,9 @@ in this side-scrolling, arcade-style shoot-em-up to set a new highschore and bri
 <br>-3 types of blockades that will spawn in --vertical beams (from enemy), floating block obstacles, and diagonal beams
 <br>(inspired by Jetpack Joyride)
 
+<br>There is a cooldown placed on the player's firing, so they can't spam fire too many bullets at once
+<br>-this was done by creating a variable that increments in update using Time.deltaTime in order to track if enough time has passed in between player fires
+
 ## Sources
 
 -Alien Sprite: https://www.kenney.nl/assets/alien-ufo-pack
