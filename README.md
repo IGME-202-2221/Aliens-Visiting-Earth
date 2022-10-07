@@ -46,6 +46,10 @@ in this side-scrolling, arcade-style shoot-em-up to set a new highschore and bri
 <br>There is a cooldown placed on the player's firing, so they can't spam fire too many bullets at once
 <br>-this was done by creating a variable that increments in update using Time.deltaTime in order to track if enough time has passed in between player fires
 
+<br>Enemy Types:
+<br>-Basic Enemy: fire bullets at player
+<br>-Homing Enemy: doesn't fire bullets, but moves toward player and damages player on collision
+
 ## Sources
 
 -Alien Sprite: https://www.kenney.nl/assets/alien-ufo-pack
