@@ -14,14 +14,21 @@ public class EnemyInfo : MonoBehaviour
     int enemyType;
 
     public int Health { get { return health; } set { health = value; } }
-    Vector3 enemyPosition;
+
+    Vector3 tempPosition;
+
     Vector3 direction = new Vector3(0, -1, 0);
+    public Vector3 Direction { get { return direction; } set { direction = value; } }
+
     Vector3 velocity = Vector3.zero;
 
     float totalCamHeight;
     float totalCamWidth;
-    
 
+    bool collided = false;
+    public bool Collided { get { return collided; } set { collided = value; } }
+    float flashTime;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -42,17 +49,10 @@ public class EnemyInfo : MonoBehaviour
                 // update enemy position
                 velocity = direction * speed * Time.deltaTime;
 
-                // check y bounds
-                enemyPosition = transform.position + velocity;
-                if (enemyPosition.y > totalCamHeight + 1)
-                {
-                    enemyPosition.y = -totalCamHeight;
-                }
-                if (enemyPosition.y < -totalCamHeight - 1)
-                {
-                    enemyPosition.y = totalCamHeight;
-                }
-                transform.position =enemyPosition;
+                // validate collision
+                tempPosition = transform.position + velocity;
+                HandleBoundsCollisions();
+                transform.position = tempPosition;
                 break;
 
             case 2:
@@ -65,8 +65,53 @@ public class EnemyInfo : MonoBehaviour
         
         }
 
-
-        
+        // check collision
+        // if so, flash red
+        if (collided)
+        {
+            if (flashTime < .1f)
+            {
+                flashTime += Time.deltaTime;
+                GetComponent<SpriteRenderer>().color = Color.red;
+            }
+            else
+            {
+                collided = false;
+            }
+        }
+        else
+        {
+            flashTime = 0;
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
 
     }
+
+    // method that has enemies bounds off walls
+    public void HandleBoundsCollisions()
+    {
+        // if enemy collides with a wall,
+        // reverse direction
+        if (GetComponent<SpriteInfo>().MinX < -totalCamWidth)
+        {
+            tempPosition.x = -totalCamWidth + 1;
+            direction = -direction;
+        }
+        if (GetComponent<SpriteInfo>().MaxX > totalCamWidth)
+        {
+            tempPosition.x = totalCamWidth - 1;
+            direction = -direction;
+        }
+        if (GetComponent<SpriteInfo>().MinY < -totalCamHeight)
+        {
+            tempPosition.y = -totalCamHeight + 1;
+            direction = -direction;
+        }
+        if (GetComponent<SpriteInfo>().MaxY > totalCamHeight)
+        {
+            tempPosition.y = totalCamHeight - 1;
+            direction = -direction;
+        }
+    }
+
 }

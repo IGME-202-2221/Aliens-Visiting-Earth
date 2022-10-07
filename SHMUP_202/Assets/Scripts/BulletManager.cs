@@ -27,6 +27,8 @@ public class BulletManager : MonoBehaviour
 
     GameObject enemyManager;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,16 +59,12 @@ public class BulletManager : MonoBehaviour
         {
             if (AABBCollision(gameObject, enemyList[i]))
             {
-                Debug.Log("Hit");
-                enemyList[i].GetComponent<SpriteRenderer>().color = Color.red;
+                // indicate a collision occured
+                enemyList[i].GetComponent<EnemyInfo>().Collided = true;
+
                 DestroyBullet(gameObject);
             }
-            else
-            {
-                enemyList[i].GetComponent<SpriteRenderer>().color = Color.white;
-            }
         }
-
 
         // check for out of bounds
         // if out of bounds, terminate bullet
@@ -103,6 +101,7 @@ public class BulletManager : MonoBehaviour
             return false;
         }
     }
+
 
     /// <summary>
     /// destroy's bullet object and removes it from the list of active bullets

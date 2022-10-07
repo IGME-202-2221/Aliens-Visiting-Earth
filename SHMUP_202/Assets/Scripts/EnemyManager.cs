@@ -32,6 +32,7 @@ public class EnemyManager : MonoBehaviour
 
     }
 
+
     public GameObject SpawnEnemy()
     {
         GameObject newEnemy;
