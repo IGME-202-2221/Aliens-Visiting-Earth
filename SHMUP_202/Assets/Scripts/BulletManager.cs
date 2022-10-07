@@ -52,12 +52,6 @@ public class BulletManager : MonoBehaviour
         // check for coillision with each enemy
         // get reference to list of spawned enemies
         enemyList = enemyManager.GetComponent<EnemyManager>().SpawnedEnemies;
-        Debug.Log(enemyList.Count);
-
-        for (int i = 0; i < enemyList.Count; i++)
-        {
-            enemyList[i].GetComponent<SpriteRenderer>().color = Color.white;
-        }
 
         for (int i = 0; i < enemyList.Count; i++)
         {
@@ -66,6 +60,10 @@ public class BulletManager : MonoBehaviour
                 Debug.Log("Hit");
                 enemyList[i].GetComponent<SpriteRenderer>().color = Color.red;
                 DestroyBullet(gameObject);
+            }
+            else
+            {
+                enemyList[i].GetComponent<SpriteRenderer>().color = Color.white;
             }
         }
 
