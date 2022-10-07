@@ -9,42 +9,41 @@ public class Fire : MonoBehaviour
     [SerializeField]
     GameObject bullet;
 
+    // create a list to store spawned bullets
+    //public List<GameObject> bullets = new List<GameObject>();
+    //public List<GameObject> Bullets { get { return bullets; } }
+
     [SerializeField]
-    float speed;
+    float fireCooldown = 0.1f;
 
-    Vector3 bulletPosition = Vector3.zero;
-    Vector3 direction = Vector3.zero;
-    Vector3 velocity = Vector3.zero;
-
-    private List<GameObject> bullets = new List<GameObject>();
+    private float timeSinceLastFire;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        timeSinceLastFire = fireCooldown;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // move all bullets in list based on their direction vector
-        for (int i = 0; i < bullets.Count; i++)
-        {
-            
-        }
-
-        // check collisions for all bullets
-
-        // if there are any collisions with enemies, damage objects and destroy bullets
-
-        // check for bullets leaving screen bounds, and destroy accordingly
+        // increment time since the player last fired
+        timeSinceLastFire += Time.deltaTime;
     }
 
     
     // call SpawnBullet based on player input
     public void OnFire(InputAction.CallbackContext context)
     {
-        SpawnBullet();
+        // pevent player from firing too quickly
+        if (timeSinceLastFire >= fireCooldown)
+        {
+            // add newBullet to a list of bullets
+            //bullets.Add(SpawnBullet());
+            SpawnBullet();
+
+            timeSinceLastFire = 0f;
+        }
     }
 
     public GameObject SpawnBullet()
@@ -52,9 +51,6 @@ public class Fire : MonoBehaviour
         // instantiate a new bullet and set its initial spawn location based on player position
         Vector3 spawnPoint = transform.position;
         GameObject newBullet = Instantiate(bullet, spawnPoint, Quaternion.identity);
-
-        // add newBullet to a list of bullets
-        bullets.Add(newBullet);
 
         return newBullet;
     }

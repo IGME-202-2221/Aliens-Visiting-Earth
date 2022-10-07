@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    float speed = 5f;
+    float speed = 10f;
 
     Vector3 playerPosition = Vector3.zero;
     Vector3 direction = Vector3.zero;
