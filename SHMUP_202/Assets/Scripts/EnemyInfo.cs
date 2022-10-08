@@ -66,7 +66,7 @@ public class EnemyInfo : MonoBehaviour
         }
 
         // check collision
-        // if so, flash red
+        // if so, flash red for a short amount of time
         if (collided)
         {
             if (flashTime < .1f)
