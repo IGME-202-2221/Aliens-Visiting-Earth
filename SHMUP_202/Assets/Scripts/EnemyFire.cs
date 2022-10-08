@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Fire : MonoBehaviour
+public class EnemyFire : MonoBehaviour
 {
     // get a reference to which prefab to spawn
     [SerializeField]
     GameObject bullet;
 
     [SerializeField]
-    float fireCooldown = 0.1f;
+    float fireCooldown = 1.5f;
 
     private float timeSinceLastFire;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,13 +24,13 @@ public class Fire : MonoBehaviour
     {
         // increment time since the player last fired
         timeSinceLastFire += Time.deltaTime;
+
+        FireEnemyBullet();
     }
 
-    
-    // call SpawnBullet based on player input
-    public void OnFire(InputAction.CallbackContext context)
+    public void FireEnemyBullet()
     {
-        // pevent player from firing too quickly
+        // pevent enemy from firing too quickly
         if (timeSinceLastFire >= fireCooldown)
         {
             SpawnBullet();
@@ -48,6 +47,4 @@ public class Fire : MonoBehaviour
 
         return newBullet;
     }
-
-
 }

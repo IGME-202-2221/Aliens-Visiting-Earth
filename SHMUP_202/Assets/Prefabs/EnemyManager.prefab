@@ -48,4 +48,4 @@ MonoBehaviour:
   - {fileID: 8858078508049646260, guid: d904684c024f7bf45b4feb8e7d62828d, type: 3}
   - {fileID: 3261489155035018435, guid: caaf6017d02412d4083dd64bb4eafb61, type: 3}
   spawnedEnemies: []
-  count: 0
+  timeBetweenSpawn: 2

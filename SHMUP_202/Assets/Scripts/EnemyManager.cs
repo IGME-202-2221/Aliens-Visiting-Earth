@@ -15,6 +15,12 @@ public class EnemyManager : MonoBehaviour
     float totalCamHeight;
     float totalCamWidth;
 
+    // time variables related to spawning as game progresses
+    // time since last spawn
+    float currentElapsedTime;
+    // time in between spawns
+    public float timeBetweenSpawn1 = 2.0f;  // for enemy type 1
+    float totalElapsedTime;
 
     // Start is called before the first frame update
     void Start()
@@ -23,17 +29,43 @@ public class EnemyManager : MonoBehaviour
         totalCamHeight = Camera.main.orthographicSize;
         totalCamWidth = totalCamHeight * Camera.main.aspect;
 
-        spawnedEnemies.Add(SpawnEnemy());
+        // spawn an enemy upon start
+        spawnedEnemies.Add(SpawnEnemyBasic());
+
+        totalElapsedTime = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // increment totalElapsedTime each frame to store how long the game has been running
+        totalElapsedTime += Time.deltaTime;
+        currentElapsedTime += Time.deltaTime;
 
+        ContinuousSpawnBasic();
+
+        // depending on how much total time has based,
+        // slowly decrement the amount of time in between spawns to increase challenge
+        if (totalElapsedTime < 10f)
+        {
+            timeBetweenSpawn1 = 2f;
+        }
+        else if (totalElapsedTime < 20f)
+        {
+            timeBetweenSpawn1 = 1.5f;
+        }
+        else if (totalElapsedTime < 60f)
+        {
+            timeBetweenSpawn1 = 1f;
+        }
+        else
+        {
+            timeBetweenSpawn1 = 0.5f;
+        }
     }
 
-
-    public GameObject SpawnEnemy()
+    // spawn an enemy of type basic
+    public GameObject SpawnEnemyBasic()
     {
         GameObject newEnemy;
 
@@ -45,8 +77,20 @@ public class EnemyManager : MonoBehaviour
     public Vector3 RandomSpawnPoint()
     {
         // determine where enemy spawns
-        Vector3 spawnPoint = new Vector3(totalCamWidth - 1f, Random.Range(-totalCamHeight, totalCamHeight), 0);
+        Vector3 spawnPoint = new Vector3(totalCamWidth + 2f, Random.Range(-totalCamHeight, totalCamHeight), 0);
 
         return spawnPoint;
+    }
+
+    public void ContinuousSpawnBasic()
+    {
+        if (currentElapsedTime >= timeBetweenSpawn1)
+        {
+            // reset time
+            currentElapsedTime = 0;
+
+            // spawn enemy
+            spawnedEnemies.Add(SpawnEnemyBasic());
+        }
     }
 }

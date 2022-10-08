@@ -15,6 +15,16 @@ public class Player : MonoBehaviour
     float totalCamHeight;
     float totalCamWidth;
 
+    private bool hit = false;
+    public bool Hit { get { return hit; }  set { hit = value; } }
+
+    private int health = 100;
+
+    float invicibilityTime;
+
+    [SerializeField]
+    GameObject enemyBullet;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +67,27 @@ public class Player : MonoBehaviour
 
         // draw the new (validated) position
         transform.position = playerPosition;
+
+        // if the player is hit, deal damage
+        if (hit)
+        {
+            Debug.Log("player hit");
+            // provide the player with i-frames
+            if (invicibilityTime < .2f)
+            {
+                invicibilityTime += Time.deltaTime;
+            }
+            else
+            {
+                // decrement player health
+                hit = false;
+                health -= enemyBullet.GetComponent<EnemyBulletManager>().Damage;
+            }
+        }
+        else
+        {
+            invicibilityTime = 0;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)

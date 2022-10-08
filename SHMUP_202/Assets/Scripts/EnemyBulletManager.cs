@@ -2,37 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletManager : MonoBehaviour
+public class EnemyBulletManager : MonoBehaviour
 {
-    // this script will handle movement of bullets
-    // check for collisions/out of bounds
-    // and destroying bullets accordingly
-
-    [SerializeField]
-    GameObject player;
-
+    // this script handles the movement, etc. for enemy bullets only
     [SerializeField]
     float speed = 5f;
 
     [SerializeField]
     int damage = 10;
+    public int Damage { get { return damage; } }
 
-    Vector3 direction = new Vector3(1, 0, 0);
+    [SerializeField]
+    GameObject player;
+
+    Vector3 direction = new Vector3(-1, 0, 0);
     Vector3 velocity = Vector3.zero;
 
     float totalCamHeight;
     float totalCamWidth;
-    
-    List<GameObject> enemyList;
-
-    GameObject enemyManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        // search for enemy manager object and retrieve that one for reference
-        enemyManager = GameObject.Find("EnemyManager");
-
         // store camera dimensions
         totalCamHeight = Camera.main.orthographicSize;
         totalCamWidth = totalCamHeight * Camera.main.aspect;
@@ -49,21 +40,13 @@ public class BulletManager : MonoBehaviour
         // draw the new (validated) position
         transform.position = newPosition;
 
-        // check for coillision with each enemy
-        // get reference to list of spawned enemies
-        enemyList = enemyManager.GetComponent<EnemyManager>().SpawnedEnemies;
-
-        for (int i = 0; i < enemyList.Count; i++)
+        // check for collisions with player
+        if (AABBCollision(gameObject, player))
         {
-            if (AABBCollision(gameObject, enemyList[i]))
-            {
-                // indicate a collision occured
-                enemyList[i].GetComponent<EnemyInfo>().Collided = true;
-                // damage the enemy
-                enemyList[i].GetComponent<EnemyInfo>().Health -= damage;
-
-                DestroyBullet(gameObject);
-            }
+            // if there is a collision, set player's hit bool to true
+            player.GetComponent<Player>().Hit = true;
+            DestroyBullet(gameObject);
+            Debug.Log("collision");
         }
 
         // check for out of bounds
@@ -87,12 +70,12 @@ public class BulletManager : MonoBehaviour
     }
 
     // checks AABB collision with 2 game objects
-    public bool AABBCollision(GameObject bullet, GameObject enemy)
+    public bool AABBCollision(GameObject bullet, GameObject player)
     {
-        if ((bullet.GetComponent<SpriteInfo>().MinX < enemy.GetComponent<SpriteInfo>().MaxX) &&
-            (bullet.GetComponent<SpriteInfo>().MaxX > enemy.GetComponent<SpriteInfo>().MinX) &&
-            (bullet.GetComponent<SpriteInfo>().MaxY > enemy.GetComponent<SpriteInfo>().MinY) &&
-            (bullet.GetComponent<SpriteInfo>().MinY < enemy.GetComponent<SpriteInfo>().MaxY))
+        if ((bullet.GetComponent<SpriteInfo>().MinX < player.GetComponent<SpriteInfo>().MaxX) &&
+            (bullet.GetComponent<SpriteInfo>().MaxX > player.GetComponent<SpriteInfo>().MinX) &&
+            (bullet.GetComponent<SpriteInfo>().MaxY > player.GetComponent<SpriteInfo>().MinY) &&
+            (bullet.GetComponent<SpriteInfo>().MinY < player.GetComponent<SpriteInfo>().MaxY))
         {
             return true;
         }
@@ -101,7 +84,6 @@ public class BulletManager : MonoBehaviour
             return false;
         }
     }
-
 
     /// <summary>
     /// destroy's bullet object and removes it from the list of active bullets
