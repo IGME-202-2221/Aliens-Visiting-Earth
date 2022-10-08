@@ -12,8 +12,9 @@
 -   Camera Orientation: side view
 -   Camera Movement: stationary camera with scrolling background
                     <br>-stationary ceiling and floor
--   Player Health: the player has 3 lives, each time they get hit they lose a life
--   End Condition: -level ends when the player has lost all 3 lives
+-   Player Health: the player has a health bar, and each hit from bullet damages the player
+                    <br>-the player also has i-frames, that give the player about 1 second of invincibility after being hit
+-   End Condition: -level ends when the player has lost all their health
                    <br>-no win condition, this is an arcade style game with a highschore system instead
 -   Scoring: each time you kill an enemy, you get a certain number of points
             <br>-point amounts increment as time goes on
@@ -46,9 +47,13 @@ in this side-scrolling, arcade-style shoot-em-up to set a new highschore and bri
 <br>There is a cooldown placed on the player's firing, so they can't spam fire too many bullets at once
 <br>-this was done by creating a variable that increments in update using Time.deltaTime in order to track if enough time has passed in between player fires
 
+<br>When the player damages an enemy, the enemy flashes red for short period of time, indicating a shot has landed
+
 <br>Enemy Types:
-<br>-Basic Enemy: fire bullets at player
+<br>-Basic Enemy: flies horizontally across the game screen and fire bullets at the player
 <br>-Homing Enemy: doesn't fire bullets, but moves toward player and damages player on collision
+
+<br>Scaling Difficulty: As the game progresses and totalElapsedTime is incremented, the game will get harder due to an increased spawn rate of enemies
 
 ## Sources
 
