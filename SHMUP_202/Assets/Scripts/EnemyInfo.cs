@@ -65,10 +65,15 @@ public class EnemyInfo : MonoBehaviour
         
         }
 
+        
+
         // check collision
         // if so, flash red for a short amount of time
         if (collided)
         {
+            // if a collision occurs, deduct health
+            health;
+
             if (flashTime < .1f)
             {
                 flashTime += Time.deltaTime;
