@@ -16,6 +16,8 @@ public class EnemyInfo : MonoBehaviour
     // reference to enemy manager
     GameObject enemyManager;
 
+    GameObject player;
+
     public int Health { get { return health; } set { health = value; } }
 
     Vector3 tempPosition;
@@ -42,6 +44,8 @@ public class EnemyInfo : MonoBehaviour
 
         // search for enemy manager object and retrieve that one for reference
         enemyManager = GameObject.Find("EnemyManager");
+
+        player = enemyManager.GetComponent<EnemyManager>().Player;
     }
 
     // Update is called once per frame
@@ -94,11 +98,13 @@ public class EnemyInfo : MonoBehaviour
 
 
         // check for enemy death,
-        // if so, destroy enemy object and remove from list
+        // if so, destroy enemy object and remove from list and increment score
         if (health <= 0)
         {
             enemyManager.GetComponent<EnemyManager>().SpawnedEnemies.Remove(gameObject);
             Destroy(gameObject);
+
+            player.GetComponent<Player>().Score += 10;
         }
 
     }

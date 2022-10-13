@@ -15,6 +15,10 @@ public class EnemyManager : MonoBehaviour
     float totalCamHeight;
     float totalCamWidth;
 
+    // reference to player on the screen
+    GameObject player;
+    public GameObject Player { get { return player; } }
+
     // time variables related to spawning as game progresses
     // time since last spawn
     float currentElapsedTime;
@@ -25,6 +29,8 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("player");
+
         // store camera dimensions
         totalCamHeight = Camera.main.orthographicSize;
         totalCamWidth = totalCamHeight * Camera.main.aspect;
@@ -70,6 +76,8 @@ public class EnemyManager : MonoBehaviour
         GameObject newEnemy;
 
         newEnemy = Instantiate(enemyPrefabs[0], RandomSpawnPoint(), Quaternion.identity);
+        // pass a referene to player on screen
+        newEnemy.GetComponent<EnemyFire>().Player = player;
         
         return newEnemy;
     }
