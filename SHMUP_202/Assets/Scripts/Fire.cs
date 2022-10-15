@@ -9,10 +9,6 @@ public class Fire : MonoBehaviour
     [SerializeField]
     GameObject bullet;
 
-    // create a list to store spawned bullets
-    //public List<GameObject> bullets = new List<GameObject>();
-    //public List<GameObject> Bullets { get { return bullets; } }
-
     [SerializeField]
     float fireCooldown = 0.1f;
 
@@ -38,8 +34,6 @@ public class Fire : MonoBehaviour
         // pevent player from firing too quickly
         if (timeSinceLastFire >= fireCooldown)
         {
-            // add newBullet to a list of bullets
-            //bullets.Add(SpawnBullet());
             SpawnBullet();
 
             timeSinceLastFire = 0f;

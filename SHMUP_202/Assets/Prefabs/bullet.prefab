@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1e5ca012397aeb14185d6ef486ee25be, type: 3}
-  m_Color: {r: 1, g: 0.47532505, b: 0, a: 1}
+  m_Color: {r: 0.9528302, g: 0.813956, b: 0.68855464, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,9 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 518484820082087407, guid: fccaab36a1546aa4e9a6ca9b7d132088, type: 3}
-  enemyManager: {fileID: 7945284480662654882, guid: b2ee21eb1ebdcd24a851ebdd50f8c36a, type: 3}
   speed: 20
-  damage: 10
+  damage: 20
 --- !u!114 &-1936282561876273886
 MonoBehaviour:
   m_ObjectHideFlags: 0

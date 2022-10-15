@@ -27,5 +27,11 @@ public class SpriteInfo : MonoBehaviour
         
     }
 
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(sprite.bounds.center, sprite.bounds.size);
+    }
+
 
 }

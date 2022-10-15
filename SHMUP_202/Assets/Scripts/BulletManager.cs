@@ -27,8 +27,6 @@ public class BulletManager : MonoBehaviour
 
     GameObject enemyManager;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +59,9 @@ public class BulletManager : MonoBehaviour
             {
                 // indicate a collision occured
                 enemyList[i].GetComponent<EnemyInfo>().Collided = true;
-
+                // damage the enemy
+                enemyList[i].GetComponent<EnemyInfo>().Health -= damage;
+                
                 DestroyBullet(gameObject);
             }
         }
@@ -109,15 +109,6 @@ public class BulletManager : MonoBehaviour
     /// <param name="bullet">bullet to destroy</param>
     public void DestroyBullet(GameObject bullet)
     {
-        // search list of bullets for the bullet to remove
-        //for (int i = 0; i < player.GetComponent<Fire>().Bullets.Count; i++)
-        //{
-        //    if (player.GetComponent<Fire>().Bullets[i].Equals(bullet))
-        //    {
-        //        player.GetComponent<Fire>().Bullets.Remove(bullet);
-        //    }
-        //}
-
         Destroy(bullet);
     }
 }

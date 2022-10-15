@@ -13,11 +13,16 @@ public class EnemyInfo : MonoBehaviour
     [SerializeField]
     int enemyType;
 
+    // reference to enemy manager
+    GameObject enemyManager;
+
+    GameObject player;
+
     public int Health { get { return health; } set { health = value; } }
 
     Vector3 tempPosition;
 
-    Vector3 direction = new Vector3(0, -1, 0);
+    Vector3 direction = new Vector3(-1, 0, 0);
     public Vector3 Direction { get { return direction; } set { direction = value; } }
 
     Vector3 velocity = Vector3.zero;
@@ -27,6 +32,7 @@ public class EnemyInfo : MonoBehaviour
 
     bool collided = false;
     public bool Collided { get { return collided; } set { collided = value; } }
+
     float flashTime;
     
     // Start is called before the first frame update
@@ -35,6 +41,11 @@ public class EnemyInfo : MonoBehaviour
         // store camera dimensions
         totalCamHeight = Camera.main.orthographicSize;
         totalCamWidth = totalCamHeight * Camera.main.aspect;
+
+        // search for enemy manager object and retrieve that one for reference
+        enemyManager = GameObject.Find("EnemyManager");
+
+        player = enemyManager.GetComponent<EnemyManager>().Player;
     }
 
     // Update is called once per frame
@@ -62,11 +73,11 @@ public class EnemyInfo : MonoBehaviour
 
             default:
                 break;
-        
         }
 
+        
         // check collision
-        // if so, flash red
+        // if so, flash red for a short amount of time
         if (collided)
         {
             if (flashTime < .1f)
@@ -85,6 +96,17 @@ public class EnemyInfo : MonoBehaviour
             GetComponent<SpriteRenderer>().color = Color.white;
         }
 
+
+        // check for enemy death,
+        // if so, destroy enemy object and remove from list and increment score
+        if (health <= 0)
+        {
+            enemyManager.GetComponent<EnemyManager>().SpawnedEnemies.Remove(gameObject);
+            Destroy(gameObject);
+
+            player.GetComponent<Player>().Score += 10;
+        }
+
     }
 
     // method that has enemies bounds off walls
@@ -92,15 +114,11 @@ public class EnemyInfo : MonoBehaviour
     {
         // if enemy collides with a wall,
         // reverse direction
-        if (GetComponent<SpriteInfo>().MinX < -totalCamWidth)
+        // except for left side of window, in which case enemies are destroyed
+        if (GetComponent<SpriteInfo>().MinX < -totalCamWidth - 2)
         {
-            tempPosition.x = -totalCamWidth + 1;
-            direction = -direction;
-        }
-        if (GetComponent<SpriteInfo>().MaxX > totalCamWidth)
-        {
-            tempPosition.x = totalCamWidth - 1;
-            direction = -direction;
+            enemyManager.GetComponent<EnemyManager>().SpawnedEnemies.Remove(gameObject);
+            Destroy(gameObject);
         }
         if (GetComponent<SpriteInfo>().MinY < -totalCamHeight)
         {

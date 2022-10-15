@@ -15,6 +15,20 @@ public class Player : MonoBehaviour
     float totalCamHeight;
     float totalCamWidth;
 
+    private bool hit = false;
+    public bool Hit { get { return hit; }  set { hit = value; } }
+
+    private int health = 100;
+    public int Health { get { return health; } }
+
+    private int score;
+    public int Score { get { return score; } set { score = value; } }
+
+    float invicibilityTime;
+
+    [SerializeField]
+    GameObject enemyBullet;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +38,8 @@ public class Player : MonoBehaviour
         // store camera dimensions
         totalCamHeight = Camera.main.orthographicSize;
         totalCamWidth = totalCamHeight * Camera.main.aspect;
+
+        score = 0;
     }
 
     // Update is called once per frame
@@ -57,6 +73,36 @@ public class Player : MonoBehaviour
 
         // draw the new (validated) position
         transform.position = playerPosition;
+
+        // if the player is hit, deal damage
+        if (hit)
+        {
+            // provide the player with i-frames
+            if (invicibilityTime < .4f)
+            {
+                invicibilityTime += Time.deltaTime;
+            }
+            else
+            {
+                // decrement player health
+                hit = false;
+                health -= enemyBullet.GetComponent<EnemyBulletManager>().Damage;
+            }
+        }
+        else
+        {
+            invicibilityTime = 0;
+        }
+
+        // if player dies, end the game
+        if (health <= 0)
+        {
+            // end the game
+            Time.timeScale = 0;
+        }
+
+        Debug.Log(score);
+        
     }
 
     public void OnMove(InputAction.CallbackContext context)
