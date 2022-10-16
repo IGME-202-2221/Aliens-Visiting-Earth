@@ -64,6 +64,8 @@ Highscore system: A highscore system was created utilizing unity's PlayerPrefs c
 Known Bug: When the game over screen is active and the player hovers over the menu buttons, the paused enemies and player objects in the screen are drawn in front of canvas overlay
 <br>-I would also liked to have fixed the slight delay between when a player gets hit by an enemy bullet and when the actual health bar is updated
 
+Highscore bug: I utilized PlayerPrefs to save highscores, but noticed that the highscore I achieved within the unity editor did not transfer to the WebGL version, and I had to achieve a separate highscore there. I'm not totally sure if it will save the highscore across devices when others play the WebGL build, or if it will just save the highscores of individual player devices.
+
 ### Requirements not completed
 
 all requirements completed
