@@ -56,7 +56,7 @@ Highscore system: A highscore system was created utilizing unity's PlayerPrefs c
 ## Sources
 
 -Alien Sprite: https://www.kenney.nl/assets/alien-ufo-pack
-<br>-Obstacle Sprites: https://www.kenney.nl/assets/simple-space
+<br>-Enemy and Bullet Sprites: https://www.kenney.nl/assets/simple-space
 <br>-Space Background: https://opengameart.org/content/planet-orbit-background
 
 ## Known Issues
