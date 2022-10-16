@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public bool Hit { get { return hit; }  set { hit = value; } }
 
     private int health = 100;
-    public int Health { get { return health; } }
+    public int Health { get { return health; } set { health = value; } }
 
     private int score;
     public int Score { get { return score; } set { score = value; } }
@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
         totalCamWidth = totalCamHeight * Camera.main.aspect;
 
         score = 0;
+
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -98,10 +100,8 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             // end the game
-            Time.timeScale = 0;
+            Time.timeScale = 0f;
         }
-
-        Debug.Log(score);
         
     }
 

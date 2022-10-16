@@ -40,13 +40,11 @@ public class Fire : MonoBehaviour
         }
     }
 
-    public GameObject SpawnBullet()
+    public void SpawnBullet()
     {
         // instantiate a new bullet and set its initial spawn location based on player position
         Vector3 spawnPoint = transform.position;
         GameObject newBullet = Instantiate(bullet, spawnPoint, Quaternion.identity);
-
-        return newBullet;
     }
 
 

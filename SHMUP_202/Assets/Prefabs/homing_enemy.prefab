@@ -13,15 +13,15 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 57da0b3cbd973964a9b4723209e2825c, type: 3}
     - target: {fileID: 2714100960840342930, guid: d904684c024f7bf45b4feb8e7d62828d, type: 3}
       propertyPath: m_Color.b
-      value: 0.8249324
+      value: 0.8021835
       objectReference: {fileID: 0}
     - target: {fileID: 2714100960840342930, guid: d904684c024f7bf45b4feb8e7d62828d, type: 3}
       propertyPath: m_Color.g
-      value: 0.8867924
+      value: 0.9056604
       objectReference: {fileID: 0}
     - target: {fileID: 2714100960840342930, guid: d904684c024f7bf45b4feb8e7d62828d, type: 3}
       propertyPath: m_Color.r
-      value: 0.58143467
+      value: 0.44001427
       objectReference: {fileID: 0}
     - target: {fileID: 6555371892758596400, guid: d904684c024f7bf45b4feb8e7d62828d, type: 3}
       propertyPath: m_RootOrder
@@ -68,6 +68,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7837997956537460153, guid: d904684c024f7bf45b4feb8e7d62828d, type: 3}
+      propertyPath: speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7837997956537460153, guid: d904684c024f7bf45b4feb8e7d62828d, type: 3}
       propertyPath: enemyType
       value: 2
       objectReference: {fileID: 0}
@@ -75,5 +79,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: homing_enemy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -5355531970582620299, guid: d904684c024f7bf45b4feb8e7d62828d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d904684c024f7bf45b4feb8e7d62828d, type: 3}

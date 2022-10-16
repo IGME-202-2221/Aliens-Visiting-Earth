@@ -43,7 +43,7 @@ public class EnemyFire : MonoBehaviour
         }
     }
 
-    public GameObject SpawnBullet()
+    public void SpawnBullet()
     {
         // instantiate a new bullet and set its initial spawn location based on player position
         Vector3 spawnPoint = transform.position;
@@ -51,7 +51,5 @@ public class EnemyFire : MonoBehaviour
 
         // give each bullet a reference to the player on screen
         newBullet.GetComponent<EnemyBulletManager>().Player = Player;
-        
-        return newBullet;
     }
 }
