@@ -7,8 +7,7 @@ using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
 {
-    // variables data (reference to whatever has the data for score and health)
-    public float score, playerHealth;
+    GameObject player;
 
     // reference to hub components
     [SerializeField]
@@ -17,13 +16,18 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     Slider healthSlider;
 
+    private void Start()
+    {
+        player = GameObject.Find("player");
+    }
+
     // Update is called once per frame
     void Update()
     {
         // update score
-        scoreLabel.text = "SCORE: " + score;
+        scoreLabel.text = "SCORE: " + player.GetComponent<Player>().Score;
 
         // update player health
-        healthSlider.value = playerHealth;
+        healthSlider.value = player.GetComponent<Player>().Health;
     }
 }

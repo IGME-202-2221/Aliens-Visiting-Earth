@@ -12,8 +12,8 @@ public class EnemyBulletManager : MonoBehaviour
     int damage = 10;
     public int Damage { get { return damage; } }
 
-    [SerializeField]
     GameObject player;
+    public GameObject Player { get { return player; } set { player = value; } }
 
     Vector3 direction = new Vector3(-1, 0, 0);
     Vector3 velocity = Vector3.zero;
@@ -46,7 +46,6 @@ public class EnemyBulletManager : MonoBehaviour
             // if there is a collision, set player's hit bool to true
             player.GetComponent<Player>().Hit = true;
             DestroyBullet(gameObject);
-            Debug.Log("collision");
         }
 
         // check for out of bounds

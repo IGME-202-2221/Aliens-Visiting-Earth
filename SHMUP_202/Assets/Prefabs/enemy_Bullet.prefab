@@ -23,6 +23,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.7372549
       objectReference: {fileID: 0}
+    - target: {fileID: 3259703341644049851, guid: 1927cbf06e4d4734d9ecf5f7118144f3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3259703341644049851, guid: 1927cbf06e4d4734d9ecf5f7118144f3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1143864899
+      objectReference: {fileID: 0}
     - target: {fileID: 3756478720845485115, guid: 1927cbf06e4d4734d9ecf5f7118144f3, type: 3}
       propertyPath: m_Name
       value: enemy_Bullet
@@ -93,4 +101,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   damage: 10
-  player: {fileID: 518484820082087407, guid: fccaab36a1546aa4e9a6ca9b7d132088, type: 3}

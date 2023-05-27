@@ -61,7 +61,7 @@ public class BulletManager : MonoBehaviour
                 enemyList[i].GetComponent<EnemyInfo>().Collided = true;
                 // damage the enemy
                 enemyList[i].GetComponent<EnemyInfo>().Health -= damage;
-
+                
                 DestroyBullet(gameObject);
             }
         }

@@ -15,16 +15,25 @@ public class EnemyManager : MonoBehaviour
     float totalCamHeight;
     float totalCamWidth;
 
+    // reference to player on the screen
+    GameObject player;
+    public GameObject Player { get { return player; } }
+
     // time variables related to spawning as game progresses
     // time since last spawn
-    float currentElapsedTime;
+    float currentElapsedTime1;
     // time in between spawns
     public float timeBetweenSpawn1 = 2.0f;  // for enemy type 1
     float totalElapsedTime;
 
+    float currentElapsedTime2;
+    public float timeBetweenSpawn2 = 5.0f;  // for enemy type 2
+
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("player");
+
         // store camera dimensions
         totalCamHeight = Camera.main.orthographicSize;
         totalCamWidth = totalCamHeight * Camera.main.aspect;
@@ -40,9 +49,10 @@ public class EnemyManager : MonoBehaviour
     {
         // increment totalElapsedTime each frame to store how long the game has been running
         totalElapsedTime += Time.deltaTime;
-        currentElapsedTime += Time.deltaTime;
+        currentElapsedTime1 += Time.deltaTime;
+        currentElapsedTime2 += Time.deltaTime;
 
-        ContinuousSpawnBasic();
+        ContinuousSpawn();
 
         // depending on how much total time has based,
         // slowly decrement the amount of time in between spawns to increase challenge
@@ -62,6 +72,24 @@ public class EnemyManager : MonoBehaviour
         {
             timeBetweenSpawn1 = 0.5f;
         }
+
+        // increment time between spawn of second enemy type
+        if (totalElapsedTime < 10f)
+        {
+            timeBetweenSpawn2 = 5f;
+        }
+        else if (totalElapsedTime < 20f)
+        {
+            timeBetweenSpawn2 = 4f;
+        }
+        else if (totalElapsedTime < 60f)
+        {
+            timeBetweenSpawn2 = 3f;
+        }
+        else
+        {
+            timeBetweenSpawn2 = 2f;
+        }
     }
 
     // spawn an enemy of type basic
@@ -70,6 +98,8 @@ public class EnemyManager : MonoBehaviour
         GameObject newEnemy;
 
         newEnemy = Instantiate(enemyPrefabs[0], RandomSpawnPoint(), Quaternion.identity);
+        // pass a referene to player on screen
+        newEnemy.GetComponent<EnemyFire>().Player = player;
         
         return newEnemy;
     }
@@ -82,15 +112,37 @@ public class EnemyManager : MonoBehaviour
         return spawnPoint;
     }
 
-    public void ContinuousSpawnBasic()
+    public void ContinuousSpawn()
     {
-        if (currentElapsedTime >= timeBetweenSpawn1)
+        // continuously spawn enemy type 1
+        if (currentElapsedTime1 >= timeBetweenSpawn1)
         {
             // reset time
-            currentElapsedTime = 0;
+            currentElapsedTime1 = 0;
 
             // spawn enemy
             spawnedEnemies.Add(SpawnEnemyBasic());
         }
+
+        // continuously spawn enemy type 2
+        if (currentElapsedTime2 >= timeBetweenSpawn2)
+        {
+            // reset time
+            currentElapsedTime2 = 0;
+
+            // spawn enemy
+            spawnedEnemies.Add(SpawnEnemyHoming());
+        }
+    }
+
+    public GameObject SpawnEnemyHoming()
+    {
+        GameObject newEnemy;
+
+        newEnemy = Instantiate(enemyPrefabs[1], RandomSpawnPoint(), Quaternion.identity);
+        // pass a referene to player on screen
+        newEnemy.GetComponent<EnemyInfo>().Player = player;
+
+        return newEnemy;
     }
 }

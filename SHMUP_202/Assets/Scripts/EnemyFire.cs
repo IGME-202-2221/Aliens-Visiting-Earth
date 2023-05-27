@@ -13,6 +13,10 @@ public class EnemyFire : MonoBehaviour
 
     private float timeSinceLastFire;
 
+    // reference to player
+    GameObject player;
+    public GameObject Player { get { return player; } set { player = value; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,12 +43,13 @@ public class EnemyFire : MonoBehaviour
         }
     }
 
-    public GameObject SpawnBullet()
+    public void SpawnBullet()
     {
         // instantiate a new bullet and set its initial spawn location based on player position
         Vector3 spawnPoint = transform.position;
         GameObject newBullet = Instantiate(bullet, spawnPoint, Quaternion.identity);
 
-        return newBullet;
+        // give each bullet a reference to the player on screen
+        newBullet.GetComponent<EnemyBulletManager>().Player = Player;
     }
 }
